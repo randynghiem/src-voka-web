@@ -20,9 +20,9 @@ const TodoList = ({ todos, toggleTodo }) => {
 const filterTodos = (todos, filter) => {
   switch (filter) {
     case FilterType.SHOW_ACTIVE:
-      return todos.filter(todo => todo.done == false);
+      return todos.filter(todo => todo.done === false);
     case FilterType.SHOW_DONE:
-      return todos.filter(todo => todo.done == true);
+      return todos.filter(todo => todo.done === true);
     default:
       return todos;
   }
