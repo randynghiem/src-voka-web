@@ -10,6 +10,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './utils/combine-reducers';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Todo from './containers/todo';
+import Dictation from './containers/dictation';
 
 /**
  * create a global store - best with Redux
@@ -20,6 +21,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Route exact path='/' component={App} />
+      <Route path='/dictation/:vid' component={Dictation} />
       <Route path='/todo' component={Todo} />
     </Router>
   </Provider>

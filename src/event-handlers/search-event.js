@@ -1,59 +1,81 @@
-import YoutubeSearch from '../utils/youtube-search';
+import YoutubeSearch from "../utils/youtube-search";
 
 /**
  * Actions
  */
 const API_KEY = "AIzaSyCT5YNj0WpEUrt_4K8b3GZ6NoBZTOImXMA";
-const LOADED_QUERY_DATA = 'search/LOADED_QUERY_DATA';
-const NAVIGATE_NEXT_PAGE = 'search/NAVIGATE_NEXT_PAGE';
+const LOADED_QUERY_DATA = "search/LOADED_QUERY_DATA";
+const NAVIGATE_NEXT_PAGE = "search/NAVIGATE_NEXT_PAGE";
+const DT_LOAD_CAPTION = "dictation/DT_LOAD_CAPTION";
+
 const defaultState = {
-  query: "",
-  curren: -1,
-  videos: []
-}
+  current: -1,
+  videos: [],
+  caption: {
+    videoId: null,
+    lines: [],
+    playAt: null
+  }
+};
 
 /**
  * pass a function to Redux thunk for further processing
  */
-
-export const triggerQuery = (query) => {
-  return (dispatch) => {
-      // perform a search
-      YoutubeSearch({
-        key: API_KEY,
-        q: query,
-        part: 'snippet',
-        type: 'video',
-        relevanceLanguage: "de"
-      }).then(data => {
+export const triggerQuery = query => {
+  return dispatch => {
+    // perform a search
+    YoutubeSearch({
+      key: API_KEY,
+      q: query,
+      part: "snippet",
+      type: "video",
+      relevanceLanguage: "de"
+    })
+      .then(data => {
         // load data and dispatch further
         dispatch(loadedQueryData(data));
-      }).catch(err => {
+      })
+      .catch(err => {
         console.log("Error: ", err);
       });
-  }
+  };
 };
 
-export const loadedQueryData = (data) => ({
+export const loadedQueryData = data => ({
   type: LOADED_QUERY_DATA,
   payload: data
 });
 
-export const navigateNextPage = (page) => ({
+export const navigateNextPage = page => ({
   type: NAVIGATE_NEXT_PAGE,
   payload: page
+});
+
+export const loadCaption = ({ videoId, lines }) => ({
+  type: DT_LOAD_CAPTION,
+  videoId,
+  lines
 });
 
 /**
  * reducer
  */
-
-export default function (state = defaultState, action = {}) {
+export default function(state = defaultState, action = {}) {
   switch (action.type) {
     case LOADED_QUERY_DATA:
       return {
         ...state,
         videos: action.payload.items
+      };
+    case DT_LOAD_CAPTION:
+      return {
+        //control gate to decide whether to clean up data
+        ...state,
+        caption: {
+          ...state.caption,
+          videoId: action.videoId,
+          lines: action.lines
+        }
       };
     default:
       return state;
