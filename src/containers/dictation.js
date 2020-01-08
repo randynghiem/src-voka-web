@@ -1,3 +1,4 @@
+import './dictation.css';
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -19,10 +20,12 @@ const Dictation = ({ match, dispatch }) => {
     );
   }, []);
 
-  return (<div className="container">
-    <DictationPlayer />
-    <DictationCaption />
-  </div>);
+  return (
+    <div className="container">
+      <DictationPlayer />
+      <DictationCaption />
+    </div>
+  );
 };
 
 export default connect()(Dictation);

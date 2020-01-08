@@ -65,6 +65,15 @@ class YouTubePlayer extends React.Component {
     }
   }
 
+  findCurrentStart = (arr, marker) => {
+    for (let i = arr.length - 1; i > -1; i--) {
+      if (marker >= arr[i]) {
+        return arr[i];
+      }
+    }
+    return 0;
+  }
+
   /**
    * Youtube Player native event: onPlayerStateChange
    */
@@ -87,11 +96,11 @@ class YouTubePlayer extends React.Component {
       if (event.data === State.PLAYING) {
         this.intervalMarker = setInterval(() => {
           let currentTime = event.target.getCurrentTime();
-          let curStart = markers.find(t => currentTime >= t);
+          let curStart = this.findCurrentStart(markers, currentTime);
 
           if (this.currentMarker !== curStart) {
             this.currentMarker = curStart;
-            !onSpeechChange && onSpeechChange(curStart);
+            onSpeechChange && onSpeechChange(curStart);
           }
         }, pingInterval);
       } else {
@@ -287,11 +296,11 @@ YouTubePlayer.defaultProps = {
   showInfo: true,
   pingInterval: 100,
   playAt: null, //  7.591|1578150995863
-  onCued: () => {},
-  onBuffering: () => {},
-  onPlaying: () => {},
-  onPause: () => {},
-  onEnd: () => {},
+  onCued: () => { },
+  onBuffering: () => { },
+  onPlaying: () => { },
+  onPause: () => { },
+  onEnd: () => { },
   onSpeechChange: null,
   markers: null
 };

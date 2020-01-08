@@ -6,7 +6,7 @@ const SearchInput = ({ dispatch }) => {
   const queryRef = useRef(null);
 
   useEffect(() => {
-    queryRef.current.value = "deutsch";
+    queryRef.current.value = "";
   }, []);
 
   const handleClick = event => {
