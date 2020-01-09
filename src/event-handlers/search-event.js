@@ -9,6 +9,7 @@ const NAVIGATE_NEXT_PAGE = "search/NAVIGATE_NEXT_PAGE";
 const DT_LOAD_CAPTION = "dictation/DT_LOAD_CAPTION";
 const DT_JUMP_TO_LINE = "dictation/DT_JUMP_TO_LINE";
 const DT_CHANGE_TO_LINE = "dictation/DT_CHANGE_TO_LINE";
+const DT_DISPATCH_COMMAND = "dictation/DT_DISPATCH_COMMAND";
 
 const defaultState = {
   current: -1,
@@ -18,7 +19,8 @@ const defaultState = {
     lines: null,
     markers: null,
     playAt: null,
-    curStart: null
+    curStart: null,
+    command: null
   }
 };
 
@@ -90,6 +92,11 @@ const markLines = (lines, cur) => {
   }))
 };
 
+export const dispatchCommand = (command) => ({
+  type: DT_DISPATCH_COMMAND,
+  command: command
+});
+
 /**
  * reducer
  */
@@ -126,9 +133,17 @@ export default function (state = defaultState, action = {}) {
         ...state,
         caption: {
           ...state.caption,
-          playAt: action.start,
+          playAt: action.start + "|" + (new Date()).getTime(),
           curStart: action.start,
           lines: markLines(state.caption.lines, action.start)
+        }
+      };
+    case DT_DISPATCH_COMMAND:
+      return {
+        ...state,
+        caption: {
+          ...state.caption,
+          command: action.command + "|" + (new Date()).getTime()
         }
       };
     default:

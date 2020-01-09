@@ -5,6 +5,7 @@ import axios from "axios";
 import { loadCaption } from "../event-handlers/search-event";
 import DictationPlayer from "./dictation-player";
 import DictationCaption from "./dictation-caption";
+import CommandBot from '../components/command-bot';
 
 const Dictation = ({ match, dispatch }) => {
   const videoId = match.params.vid;
@@ -24,6 +25,7 @@ const Dictation = ({ match, dispatch }) => {
     <div className="container">
       <DictationPlayer />
       <DictationCaption />
+      <CommandBot />
     </div>
   );
 };

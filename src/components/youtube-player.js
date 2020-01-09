@@ -43,7 +43,8 @@ class YouTubePlayer extends React.Component {
   ];
 
   intervalMarker = null;
-  currentMarker = 0;
+  currentMarker = -1;
+  nextMarker = -1;
 
   /**
    * create when mounted
@@ -65,13 +66,17 @@ class YouTubePlayer extends React.Component {
     }
   }
 
-  findCurrentStart = (arr, marker) => {
-    for (let i = arr.length - 1; i > -1; i--) {
-      if (marker >= arr[i]) {
-        return arr[i];
+  findLastMarker = (markers, curTime, nextTime) => {
+    const total = markers.length;
+    for (let i = 1; i < total; i++) {
+      if(markers[i] > curTime && markers[i] <= nextTime){
+        return {
+          curStart: markers[i-1],
+          nextStart: markers[i]
+        };
       }
     }
-    return 0;
+    return null;
   }
 
   /**
@@ -84,7 +89,6 @@ class YouTubePlayer extends React.Component {
       onPause,
       onPlaying,
       onEnd,
-      onSpeechChange,
       pingInterval,
       markers
     } = this.props;
@@ -96,11 +100,14 @@ class YouTubePlayer extends React.Component {
       if (event.data === State.PLAYING) {
         this.intervalMarker = setInterval(() => {
           let currentTime = event.target.getCurrentTime();
-          let curStart = this.findCurrentStart(markers, currentTime);
+          const marker = this.findLastMarker(markers, currentTime, currentTime + pingInterval / 1000);
 
-          if (this.currentMarker !== curStart) {
-            this.currentMarker = curStart;
-            onSpeechChange && onSpeechChange(curStart);
+          if(marker != null){
+            console.log("marker: ", marker);
+
+            this.currentMarker = marker.curStart;
+            this.nextMarker = marker.nextStart;
+            event.target.pauseVideo();
           }
         }, pingInterval);
       } else {
@@ -209,6 +216,24 @@ class YouTubePlayer extends React.Component {
               player.seekTo(pos);
             }
             break;
+          case "command":
+            const actual = value.split("|")[0];
+            switch (actual) {
+              case "next":
+                player.playVideo();
+                this.props.onSpeechChange && this.props.onSpeechChange(this.nextMarker);
+                this.currentMarker = this.nextMarker;
+                break;
+              case "reset":
+                player.seekTo(0);
+                player.playVideo();
+                this.currentMarker = -1;
+                this.nextMarker = -1;
+                this.props.onSpeechChange && this.props.onSpeechChange(this.props.markers[0]);
+                break;
+              default:
+            }
+            break;
           default:
         }
       });
@@ -302,7 +327,8 @@ YouTubePlayer.defaultProps = {
   onPause: () => { },
   onEnd: () => { },
   onSpeechChange: null,
-  markers: null
+  markers: null,
+  command: null
 };
 
 export default YouTubePlayer;
