@@ -1,30 +1,31 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { addTodo } from '../../event-handlers/goal-event';
 
-const TodoInput = ({ dispatch }) => {
-  let input;
+/**
+ * Custom goal input with custom style
+ * @param {*} props props object with onClick event handler
+ */
+export default function ({ onClick }) {
+  const goalInput = React.useRef(null);
 
-  const handleAddTodo = el => {
-    const val = input.value.trim();
-    if (val !== '') {
-      dispatch(addTodo(val));
-      input.value = '';
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    if(goalInput && goalInput.current.value){
+      const val = goalInput.current.value.trim();
+      onClick && onClick(val);
+      goalInput.current.value = '';
     }
   };
 
   return (
-    <form>
+    <form onSubmit={handleAddTodo}>
       <div className="form-row mb-3 mt-3">
         <div className="col-8">
-          <input type="text" className="form-control" placeholder="Todo Item" ref={el => (input = el)} />
+          <input type="text" className="form-control" placeholder="Todo Item" ref={goalInput} />
         </div>
         <div className="col-4">
-          <button type="button" className="btn btn-secondary" onClick={handleAddTodo}>Add Item</button>
+          <button type="submit" className="btn btn-secondary">Add Item</button>
         </div>
       </div>
     </form>
   );
 };
-
-export default connect()(TodoInput);

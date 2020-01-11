@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './event-handlers';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Todo from './views/goal';
+import Goal from './views/goal';
 import Dictation from './views/dictation/dictation-view';
 import AppNavBar from './components/app-navbar';
 import AppFooter from './components/app-footer';
@@ -23,19 +23,19 @@ const store = createStore(reducers, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppNavBar />
-    <main className="app-body">
-      <section className="app-view">
-        <div className="container app-container">
-          <Router>
+    <Router>
+      <AppNavBar />
+      <main className="app-body">
+        <section className="app-view">
+          <div className="container app-container">
             <Route exact path="/" component={Dashboard} />
             <Route path='/dictation' component={App} />
             <Route path='/dictation/:vid' component={Dictation} />
-            <Route path='/goal' component={Todo} />
-          </Router>
-        </div>
-      </section>
-    </main>
-    <AppFooter />
+            <Route path='/goal' component={Goal} />
+          </div>
+        </section>
+      </main>
+      <AppFooter />
+    </Router>
   </Provider>
   , document.getElementById('root'));

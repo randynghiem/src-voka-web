@@ -2,7 +2,7 @@ import './dictation.css';
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { loadCaption } from "../../event-handlers/dictation-events";
+import { loadCaption } from "../../event-handlers/dictation-handlers";
 import DictationPlayer from "./dictation-player";
 import DictationCaption from "./dictation-caption";
 import CommandBot from '../../components/youtube-bot/youtube-bot';

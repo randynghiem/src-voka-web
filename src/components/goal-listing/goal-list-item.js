@@ -1,7 +1,6 @@
 import React from 'react';
 
-const TodoItem = ({ text, done, onClick }) => {
-
+export default function ({ text, done, onClick }) {
   let doneLabel = done ? ' list-group-item-success' : '';
 
   return (
@@ -11,6 +10,4 @@ const TodoItem = ({ text, done, onClick }) => {
       <span className="badge badge-secondary badge-pill">New</span>
     </li>
   );
-};
-
-export default TodoItem;
+}

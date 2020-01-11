@@ -1,7 +1,6 @@
 import React from 'react';
 import DashboardCard from '../../components/dashboard-card';
 
-
 const Dashboard = props => {
   return (
     <div className="row">

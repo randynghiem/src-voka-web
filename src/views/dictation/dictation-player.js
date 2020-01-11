@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import YouTubePlayer from "../../components/youtube-player/youtube-player";
-import { jumpToLine } from '../../event-handlers/dictation-events';
+import { jumpToLine } from '../../event-handlers/dictation-handlers';
 
 const DictationPlayer = ({ videoId, markers, playAt, jump, command }) => {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import annyang from 'annyang';
-import { dispatchCommand } from '../../event-handlers/dictation-events'
+import { dispatchCommand } from '../../event-handlers/dictation-handlers'
 
 const CommandBot = ({ dispatch }) => {
   const commands = ['repeat', 'again', 'next', 'reset', 'stop'];

@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import filter from './goal-filter-event';
-import todos from './goal-event';
-import ytSearch from './dictation-events';
+import GoalReducer from './goal-handlers';
+import ytSearch from './dictation-handlers';
 
 export default combineReducers({
-  filter,
-  todos,
+  GoalReducer,
   ytSearch
 });
