@@ -3,7 +3,7 @@
  * https://developers.google.com/youtube/v3/docs/search/list#parameters
  */
 import fetch from 'isomorphic-unfetch';
-import { convertToUrl } from '../utils/url';
+import { convertToUrl } from '../../utils/url';
 
 export const ROOT_URL = 'https://www.googleapis.com/youtube/v3/search';
 

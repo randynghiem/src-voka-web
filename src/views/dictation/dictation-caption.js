@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { changeToLine } from '../event-handlers/search-event';
+import { changeToLine } from '../../event-handlers/dictation-events';
 
 const DictationCaption = ({ lines, curStart, onLineClick }) => {
   useEffect(() => {

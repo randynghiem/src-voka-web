@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from '../event-handlers/todos-event';
+import { addTodo } from '../../event-handlers/goal-event';
 
 const TodoInput = ({ dispatch }) => {
   let input;

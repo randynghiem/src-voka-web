@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FilterType, showAll, showActive, showDone } from '../event-handlers/filter-event';
+import { FilterType, showAll, showActive, showDone } from '../../event-handlers/goal-filter-event';
 
 const TodoFooter = ({ filter, clickAll, clickActive, clickDone }) => {
 

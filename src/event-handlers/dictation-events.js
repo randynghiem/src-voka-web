@@ -1,4 +1,4 @@
-import YoutubeSearch from "../utils/youtube-search";
+import YoutubeSearch from "../services/youtube-search-api";
 
 /**
  * Actions

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { connect } from "react-redux";
-import { triggerQuery } from "../event-handlers/search-event";
+import { triggerQuery } from "../../event-handlers/dictation-events";
 
 const SearchInput = ({ dispatch }) => {
   const queryRef = useRef(null);

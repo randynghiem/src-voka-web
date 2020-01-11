@@ -1,0 +1,11 @@
+.app-container {
+  max-width: 960px;
+}
+
+.app-body {
+  margin-top: 70px;
+}
+
+.dashboard-card {
+  border-width: 0px 0px 0px 5px;
+}

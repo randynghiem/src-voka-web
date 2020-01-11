@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TodoItem from './todo-list-item';
-import { FilterType } from '../event-handlers/filter-event';
-import { toggleTodo } from '../event-handlers/todos-event';
+import { FilterType } from '../../event-handlers/goal-filter-event';
+import { toggleTodo } from '../../event-handlers/goal-event';
 
 const TodoList = ({ todos, toggleTodo }) => {
   return (

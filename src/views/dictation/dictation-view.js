@@ -2,10 +2,10 @@ import './dictation.css';
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { loadCaption } from "../event-handlers/search-event";
+import { loadCaption } from "../../event-handlers/dictation-events";
 import DictationPlayer from "./dictation-player";
 import DictationCaption from "./dictation-caption";
-import CommandBot from '../components/command-bot';
+import CommandBot from '../../components/youtube-bot/youtube-bot';
 
 const Dictation = ({ match, dispatch }) => {
   const videoId = match.params.vid;

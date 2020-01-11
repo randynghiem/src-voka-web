@@ -1,8 +1,8 @@
 //compose different todo components
 import React from 'react';
-import TodoInput from '../components/todo-input';
-import TodoList from '../components/todo-list';
-import TodoFooter from '../components/todo-footer';
+import TodoInput from '../../components/goal-input';
+import TodoList from '../../components/goal-listing/todo-list';
+import TodoFooter from '../../components/goal-listing/todo-footer';
 
 const Todo = () => {
   return (
