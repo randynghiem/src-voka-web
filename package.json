@@ -2,7 +2,7 @@
   "name": "src-voka-web",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/src-voka-web/gh-pages/",
+  "homepage": "/src-voka-web/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
