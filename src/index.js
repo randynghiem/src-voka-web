@@ -20,7 +20,7 @@ import Dashboard from './views/dashboard';
  */
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 
-const basename = process.env.NODE_ENV !== 'production' ? '/' : '/src-voka-web';
+const basename = process.env.NODE_ENV !== 'demo' ? '/' : '/src-voka-web';
 
 ReactDOM.render(
   <Provider store={store}>
