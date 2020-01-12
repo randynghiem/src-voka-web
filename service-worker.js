@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/src-voka-web/precache-manifest.cf888be04cd1d7afcf30757c46421514.js"
+  "/src-voka-web/precache-manifest.7089b1a12e251c8f7e09be3276572f2e.js"
 );
 
 self.addEventListener('message', (event) => {
