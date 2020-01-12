@@ -20,9 +20,11 @@ import Dashboard from './views/dashboard';
  */
 const store = createStore(reducers, applyMiddleware(thunk, logger));
 
+const basename = process.env.NODE_ENV !== 'production' ? '/' : '/src-voka-web';
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router basename={basename}>
       <AppNavBar />
       <main className="app-body">
         <section className="app-view">
