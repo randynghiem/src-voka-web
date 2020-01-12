@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function ({ to, title, text, icon }) {
   return (
-    <div className="card shadow border-info py-2 dashboard-card">
+    <div className="card shadow border-info py-2 dashboard-card mb-3">
       <div className="card-body">
         <div className="row align-items-center no-gutters">
           <div className="col mr-2">

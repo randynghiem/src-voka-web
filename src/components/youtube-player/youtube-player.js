@@ -1,34 +1,5 @@
-import loadScript from "load-script2";
 import React from "react";
-
-let yt = null;
-const init = () => {
-  if (!yt) {
-    yt = new Promise((resolve, reject) => {
-      if (
-        typeof window.YT === "object" &&
-        typeof window.YT.ready === "function"
-      ) {
-        window.YT.ready(() => {
-          resolve(window.YT);
-        });
-        return;
-      }
-
-      loadScript("https://www.youtube.com/iframe_api").then(
-        () => {
-          window.YT.ready(() => {
-            resolve(window.YT);
-          });
-        },
-        err => {
-          reject(err);
-        }
-      );
-    });
-  }
-  return yt;
-};
+import { init } from "./youtube-loader";
 
 /**
  * Event driven Youtube Player
@@ -43,8 +14,6 @@ class YouTubePlayer extends React.Component {
   ];
 
   intervalMarker = null;
-  currentMarker = -1;
-  nextMarker = -1;
 
   /**
    * create when mounted
@@ -69,9 +38,9 @@ class YouTubePlayer extends React.Component {
   findLastMarker = (markers, curTime, nextTime) => {
     const total = markers.length;
     for (let i = 1; i < total; i++) {
-      if(markers[i] > curTime && markers[i] <= nextTime){
+      if (markers[i] > curTime && markers[i] <= nextTime) {
         return {
-          curStart: markers[i-1],
+          curStart: markers[i - 1],
           nextStart: markers[i]
         };
       }
@@ -90,7 +59,8 @@ class YouTubePlayer extends React.Component {
       onPlaying,
       onEnd,
       pingInterval,
-      markers
+      markers,
+      onSpeechChange
     } = this.props;
 
     const State = window.YT.PlayerState;
@@ -102,12 +72,8 @@ class YouTubePlayer extends React.Component {
           let currentTime = event.target.getCurrentTime();
           const marker = this.findLastMarker(markers, currentTime, currentTime + pingInterval / 1000);
 
-          if(marker != null){
-            console.log("marker: ", marker);
-
-            this.currentMarker = marker.curStart;
-            this.nextMarker = marker.nextStart;
-            event.target.pauseVideo();
+          if (marker != null) {
+            onSpeechChange && onSpeechChange(marker.nextStart);
           }
         }, pingInterval);
       } else {
@@ -219,17 +185,18 @@ class YouTubePlayer extends React.Component {
           case "command":
             const actual = value.split("|")[0];
             switch (actual) {
-              case "next":
+              case "play":
                 player.playVideo();
-                this.props.onSpeechChange && this.props.onSpeechChange(this.nextMarker);
-                this.currentMarker = this.nextMarker;
+                break;
+              case "pause":
+                player.pauseVideo();
                 break;
               case "reset":
                 player.seekTo(0);
                 player.playVideo();
-                this.currentMarker = -1;
-                this.nextMarker = -1;
-                this.props.onSpeechChange && this.props.onSpeechChange(this.props.markers[0]);
+                break;
+              case "stop":
+                player.stopVideo();
                 break;
               default:
             }

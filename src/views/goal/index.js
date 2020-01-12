@@ -4,18 +4,26 @@ import { connect } from 'react-redux';
 import GoalInput from '../../components/goal-input';
 import GoalList from '../../components/goal-listing/goal-list';
 import GoalFilter from '../../components/goal-listing/goal-filter';
-import { addGoal, toggleGoal, FilterType, filterGoal } from '../../event-handlers/goal-handlers';
+import { addGoal, toggleGoal, FilterType, filterGoal, cleanup } from '../../event-handlers/goal-handlers';
 
-const Goal = ({ goals, filter, addGoal, toggleGoal, filterGoal }) => {
-  return (
-    <div className="row justify-content-md-center">
-      <div className="col-md-10 col-lg-8">
-        <GoalInput onClick={text => addGoal(text)} />
-        <GoalList goals={goals} toggleGoal={toggleGoal} />
-        <GoalFilter FilterType={FilterType} filter={filter} onFilter={filterGoal} />
+class Goal extends React.Component {
+
+  componentWillUnmount(){
+    this.props.onCleanup();
+  }
+
+  render() {
+    const { goals, filter, addGoal, toggleGoal, filterGoal } = this.props;
+    return (
+      <div className="row justify-content-md-center">
+        <div className="col-md-10 col-lg-8">
+          <GoalInput onClick={text => addGoal(text)} />
+          <GoalList goals={goals} toggleGoal={toggleGoal} />
+          <GoalFilter FilterType={FilterType} filter={filter} onFilter={filterGoal} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 const filterGoals = (goals, filter) => {
@@ -30,13 +38,14 @@ const filterGoals = (goals, filter) => {
 };
 
 export default connect(
-  ({ GoalReducer }) => ({
-    goals: filterGoals(GoalReducer.goals, GoalReducer.filter),
-    filter: GoalReducer.filter
+  ({ GoalState }) => ({
+    goals: filterGoals(GoalState.goals, GoalState.filter),
+    filter: GoalState.filter
   }),
   dispatch => ({
     addGoal: text => dispatch(addGoal(text)),
     toggleGoal: id => dispatch(toggleGoal(id)),
-    filterGoal: filter => dispatch(filterGoal(filter))
+    filterGoal: filter => dispatch(filterGoal(filter)),
+    onCleanup: () => dispatch(cleanup())
   })
 )(Goal);

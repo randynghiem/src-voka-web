@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import GoalReducer from './goal-handlers';
-import ytSearch from './dictation-handlers';
+import GoalState from './goal-handlers';
+import DictationState from './dictation-handlers';
 
 export default combineReducers({
-  GoalReducer,
-  ytSearch
+  GoalState,
+  DictationState
 });

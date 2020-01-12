@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './views/dictation';
+import DictationApp from './views/dictation';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { Provider } from 'react-redux';
@@ -11,9 +11,8 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './event-handlers';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Goal from './views/goal';
-import Dictation from './views/dictation/dictation-view';
+import DictationView from './views/dictation/dictation-view';
 import AppNavBar from './components/app-navbar';
-import AppFooter from './components/app-footer';
 import Dashboard from './views/dashboard';
 
 /**
@@ -29,13 +28,12 @@ ReactDOM.render(
         <section className="app-view">
           <div className="container app-container">
             <Route exact path="/" component={Dashboard} />
-            <Route path='/dictation' component={App} />
-            <Route path='/dictation/:vid' component={Dictation} />
+            <Route exact path='/dictation' component={DictationApp} />
+            <Route path='/dictation/:vid' component={DictationView} />
             <Route path='/goal' component={Goal} />
           </div>
         </section>
       </main>
-      <AppFooter />
     </Router>
   </Provider>
   , document.getElementById('root'));

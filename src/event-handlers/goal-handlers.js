@@ -4,6 +4,7 @@
 const TOGGLE_GOAL = "goals/TOGGLE_GOAL";
 const ADD_GOAL = "goals/ADD_GOAL";
 const FILTER_GOAL = "goals/FILTER_GOAL";
+const CLEANUP = 'goals/CLEANUP';
 export const FilterType = {
   SHOW_ALL: "SHOW_ALL",
   SHOW_ACTIVE: "SHOW_ACTIVE",
@@ -22,6 +23,7 @@ let goalCount = 0;
 export const toggleGoal = id => ({ type: TOGGLE_GOAL, id });
 export const addGoal = text => ({ type: ADD_GOAL, id: goalCount++, done: false, text });
 export const filterGoal = (filter) => ({ type: FILTER_GOAL, filter });
+export const cleanup = () => ({ type: CLEANUP });
 
 /**
  * reducer
@@ -43,6 +45,8 @@ export default function reducer(state = DEFAULT_STATE, action = {}) {
         ...state,
         filter: action.filter
       };
+    case CLEANUP:
+      return DEFAULT_STATE;
     default:
       return state;
   }

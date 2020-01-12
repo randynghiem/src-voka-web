@@ -1,33 +1,34 @@
-import './dictation.css';
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import axios from "axios";
-import { loadCaption } from "../../event-handlers/dictation-handlers";
+import React from "react";
+import { connect } from 'react-redux';
 import DictationPlayer from "./dictation-player";
 import DictationCaption from "./dictation-caption";
-import CommandBot from '../../components/youtube-bot/youtube-bot';
+import { cleanupDictationView } from '../../event-handlers/dictation-handlers';
 
-const Dictation = ({ match, dispatch }) => {
-  const videoId = match.params.vid;
-  useEffect(() => {
-    axios(`https://voka.azurewebsites.net/api/v1/captions/${videoId}/de`).then(
-      response =>
-        dispatch(
-          loadCaption({
-            videoId: videoId,
-            lines: response.data
-          })
-        )
+class DictationView extends React.Component {
+
+  componentWillUnmount() {
+    this.props.dispatch(cleanupDictationView());
+  }
+
+  render() {
+    const { match } = this.props;
+    const videoId = match.params.vid;
+
+    return (
+      <React.Fragment>
+        <div className="row">
+          <div className="col-md-12 text-center">
+            <DictationPlayer videoId={videoId} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <DictationCaption videoId={videoId} />
+          </div>
+        </div>
+      </React.Fragment>
     );
-  }, []);
+  }
+}
 
-  return (
-    <div className="container">
-      <DictationPlayer />
-      <DictationCaption />
-      <CommandBot />
-    </div>
-  );
-};
-
-export default connect()(Dictation);
+export default connect()(DictationView);

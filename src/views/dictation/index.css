@@ -4,7 +4,7 @@
   overflow-x: hidden;
   border: 1px solid #eee;
   width: 100%;
-  max-width: 720px;
+  max-width: 940px;
 }
 
 .caption-item {
@@ -27,4 +27,8 @@
 
 .caption-item .caption-item-time {
   width: 4rem;
+}
+
+.app-yt-item:hover {
+  background-color: #eee;
 }

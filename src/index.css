@@ -8,4 +8,5 @@
 
 .dashboard-card {
   border-width: 0px 0px 0px 5px;
+  min-height: 150px;
 }

@@ -1,18 +1,22 @@
-import React, { useRef, useEffect } from "react";
-import { connect } from "react-redux";
-import { triggerQuery } from "../../event-handlers/dictation-handlers";
+import React, { useRef } from "react";
 
-const SearchInput = ({ dispatch }) => {
+/**
+ * Custom search input component
+ * @param {object} props React props with custom onClick event
+ */
+export default function ({ query, onClick }) {
   const queryRef = useRef(null);
 
-  useEffect(() => {
-    queryRef.current.value = "";
+  React.useEffect(() => {
+    if (queryRef) {
+      queryRef.current.value = query;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = event => {
     event.preventDefault();
-
-    queryRef.current.value && dispatch(triggerQuery(queryRef.current.value));
+    queryRef.current.value && onClick && onClick(queryRef.current.value);
   };
 
   return (
@@ -36,6 +40,4 @@ const SearchInput = ({ dispatch }) => {
       </div>
     </form>
   );
-};
-
-export default connect()(SearchInput);
+}

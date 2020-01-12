@@ -1,40 +1,31 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { changeToLine } from '../../event-handlers/dictation-handlers';
+import axios from "axios";
+import { changeToLine, loadCaption } from '../../event-handlers/dictation-handlers';
+import YoutubeCaption from '../../components/youtube-caption';
 
-const DictationCaption = ({ lines, curStart, onLineClick }) => {
+const DictationCaption = ({ videoId, lines, curStart, onLineClick, onLoaded }) => {
+
   useEffect(() => {
-    let curLine = document.querySelector('.caption-viewer .current');
-    if (curLine != null) {
-      curLine.scrollIntoView({ behavior: 'smooth', block: "center" });
-    }
-  }, [curStart]);
+    axios(`https://voka.azurewebsites.net/api/v1/captions/${videoId}/de`).then(
+      response => onLoaded(videoId, response.data)
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    lines &&
-    <div className="row">
-      <ul className="list-group list-group-flush caption-viewer mt-3">
-        {
-          lines.map(li => (
-            <li className={"list-group-item caption-item " + li.current}
-              key={li.start} data-start={li.start}
-              onClick={e => onLineClick(e.currentTarget.dataset.start)}>
-              <span className="caption-item-time">{li.formattedStart}</span>
-              <span className="caption-item-text">{li.text}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+    <YoutubeCaption lines={lines} curStart={curStart} onLineClick={onLineClick} />
   );
 };
 
 export default connect(
-  ({ytSearch}) => ({
-    lines: ytSearch.caption.lines,
-    curStart: ytSearch.caption.curStart
+  ({ DictationState }, ownProps) => ({
+    lines: DictationState.view.lines,
+    curStart: DictationState.view.curStart,
+    videoId: ownProps.videoId
   }),
   dispatch => ({
-    onLineClick: start => dispatch(changeToLine(start))
+    onLineClick: start => dispatch(changeToLine(start)),
+    onLoaded: (videoId, lines) => dispatch(loadCaption({ videoId, lines }))
   })
 )(DictationCaption);
