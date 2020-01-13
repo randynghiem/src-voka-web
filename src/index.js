@@ -14,6 +14,7 @@ import Goal from './views/goal';
 import DictationView from './views/dictation/dictation-view';
 import AppNavBar from './components/app-navbar';
 import Dashboard from './views/dashboard';
+import Voice from './views/voice';
 
 /**
  * create a global store - best with Redux
@@ -33,6 +34,7 @@ ReactDOM.render(
             <Route exact path='/dictation' component={DictationApp} />
             <Route path='/dictation/:vid' component={DictationView} />
             <Route path='/goal' component={Goal} />
+            <Route path='/voice' component={Voice} />
           </div>
         </section>
       </main>
