@@ -17,11 +17,23 @@ import Dashboard from './views/dashboard';
 import Voice from './views/voice';
 
 /**
+ * Initial setup
+ */
+const middlewares = [thunk];
+let basename = '/src-voka-web';
+
+/**
+ * Development setup
+ */
+if(process.env.NODE_ENV === 'development'){
+  middlewares.push(logger);
+  basename = '/';
+}
+
+/**
  * create a global store - best with Redux
  */
-const store = createStore(reducers, applyMiddleware(thunk, logger));
-
-const basename = process.env.NODE_ENV !== 'demo' ? '/' : '/src-voka-web';
+const store = createStore(reducers, applyMiddleware(...middlewares));
 
 ReactDOM.render(
   <Provider store={store}>
