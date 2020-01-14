@@ -20,18 +20,21 @@ import Voice from './views/voice';
  * Initial setup
  */
 const middlewares = [thunk];
-let basename = '/src-voka-web';
+let basename = process.env.REACT_APP_BASE_NAME;
+
+console.log("NODE_ENV: ", process.env.NODE_ENV);
+console.log("REACT_APP_BASE_NAME: ", process.env.REACT_APP_BASE_NAME);
 
 /**
  * Development setup
  */
 if(process.env.NODE_ENV === 'development'){
   middlewares.push(logger);
-  basename = '/';
 }
 
-console.log(process.env.NODE_ENV);
-console.log(process.env.REACT_APP_YOUTUBE_SEARCH_KEY);
+if(process.env.NODE_ENV === 'production'){
+  //TODO: enable security features
+}
 
 /**
  * create a global store - best with Redux

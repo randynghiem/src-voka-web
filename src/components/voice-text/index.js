@@ -4,10 +4,10 @@ import { parseText } from "../../utils/text-processing";
 export default function VoiceText({ onPlay, onRepeat, onImport }) {
   const textboxRef = React.useRef(null);
 
-  const sample = 'Dazu kommt ein sogenannter "Mechanismus für einen gerechten Übergang". Von der Leyen will damit Regionen, die beispielsweise stark von der Kohleverstromung abhängen, beim Strukturwandel helfen. Am Dienstagnachmittag diskutiert das Europaparlament, das zuletzt reichlich reißerisch den "Klimanotstand" ausgerufen hatte, über die Pläne, für Mittwoch ist eine Resolution geplant.';
-
   React.useEffect(() => {
-    textboxRef.current.value = sample;
+    if (process.env.REACT_APP_VOICE_TEXT_SAMPLE) {
+      textboxRef.current.value = process.env.REACT_APP_VOICE_TEXT_SAMPLE;
+    }
   }, []);
 
   const processText = e => {
@@ -27,9 +27,7 @@ export default function VoiceText({ onPlay, onRepeat, onImport }) {
     <form onSubmit={processText}>
       <div className="form-row">
         <div className="form-group col-md-12">
-          <label htmlFor="voiceTextControl">
-            Paste the text you want to listen!
-          </label>
+          <label htmlFor="voiceTextControl">Paste the text you want to listen!</label>
           <textarea
             ref={textboxRef}
             className="form-control"
