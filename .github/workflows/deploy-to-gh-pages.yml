@@ -11,8 +11,6 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Build
-      env:
-        NODE_ENV: demo
       run: |
         npm install
         npm run build
