@@ -2,7 +2,7 @@ import React from "react";
 
 export default function VoiceTest({}) {
 
-  const talk = (voice, lang, text, rate) {
+  const talk = (voice, lang, text, rate) => {
     let u = new SpeechSynthesisUtterance();
     u.voice = voice;
     u.lang = lang;
