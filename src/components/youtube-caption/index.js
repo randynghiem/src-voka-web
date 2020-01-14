@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 export default function ({ lines, curStart, onLineClick }) {
   React.useEffect(() => {

@@ -2,12 +2,12 @@ import React from "react";
 import { connect } from 'react-redux';
 import DictationPlayer from "./dictation-player";
 import DictationCaption from "./dictation-caption";
-import { cleanupDictationView } from '../../event-handlers/dictation-handlers';
+import { cleanup } from '../../event-handlers/dictation-view';
 
 class DictationView extends React.Component {
 
   componentWillUnmount() {
-    this.props.dispatch(cleanupDictationView());
+    this.props.dispatch(cleanup());
   }
 
   render() {

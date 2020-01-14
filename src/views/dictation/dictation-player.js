@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import YouTubePlayer from "../../components/youtube-player/youtube-player";
-import { jumpToLine, dispatchCommand } from '../../event-handlers/dictation-handlers';
+import { jumpToLine, dispatchCommand } from '../../event-handlers/dictation-view';
 import CommandBot from '../../components/youtube-bot';
 
-const DictationPlayer = ({ videoId, markers, playAt, jump, command, onCommand }) => {
+const DictationPlayer = ({ videoId, markers, playAt, onJump, command, onCommand }) => {
   return (
     <React.Fragment>
       {markers &&
         <YouTubePlayer
         video={videoId}
         markers={markers}
-        onSpeechChange={start => jump(start)}
+        onSpeechChange={start => onJump(start)}
         playAt={playAt}
         command={command}
         width="720"
@@ -24,14 +24,14 @@ const DictationPlayer = ({ videoId, markers, playAt, jump, command, onCommand })
 };
 
 export default connect(
-  ({ DictationState }, ownProps) => ({
+  ({ DictationView }, ownProps) => ({
     videoId: ownProps.videoId,
-    markers: DictationState.view.markers,
-    playAt: DictationState.view.playAt,
-    command: DictationState.view.command
+    markers: DictationView.markers,
+    playAt: DictationView.playAt,
+    command: DictationView.command
   }),
   dispatch => ({
-    jump: start => dispatch(jumpToLine(start)),
+    onJump: start => dispatch(jumpToLine(start)),
     onCommand: cmd => dispatch(dispatchCommand(cmd))
   })
 )(DictationPlayer);

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import GoalInput from '../../components/goal-input';
 import GoalList from '../../components/goal-listing/goal-list';
 import GoalFilter from '../../components/goal-listing/goal-filter';
-import { addGoal, toggleGoal, FilterType, filterGoal, cleanup } from '../../event-handlers/goal-handlers';
+import { addGoal, toggleGoal, FilterType, filterGoal, cleanup } from '../../event-handlers/goal';
 
 class Goal extends React.Component {
 

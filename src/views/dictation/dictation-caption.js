@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from "axios";
-import { changeToLine, loadCaption } from '../../event-handlers/dictation-handlers';
+import { changeToLine, loadCaption } from '../../event-handlers/dictation-view';
 import YoutubeCaption from '../../components/youtube-caption';
 
 const DictationCaption = ({ videoId, lines, curStart, onLineClick, onLoaded }) => {
@@ -19,9 +19,9 @@ const DictationCaption = ({ videoId, lines, curStart, onLineClick, onLoaded }) =
 };
 
 export default connect(
-  ({ DictationState }, ownProps) => ({
-    lines: DictationState.view.lines,
-    curStart: DictationState.view.curStart,
+  ({ DictationView }, ownProps) => ({
+    lines: DictationView.lines,
+    curStart: DictationView.curStart,
     videoId: ownProps.videoId
   }),
   dispatch => ({

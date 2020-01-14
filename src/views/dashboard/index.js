@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
     return (
       <div className="row">
         {this.sections.map(sc => (
-          <div className="col-md-6">
+          <div className="col-md-6" key={sc.to}>
             <DashboardCard
               to={sc.to}
               title={sc.title}

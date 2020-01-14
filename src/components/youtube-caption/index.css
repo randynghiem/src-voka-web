@@ -1,5 +1,5 @@
 .caption-viewer {
-  height: 405px;
+  height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   border: 1px solid #eee;
@@ -27,8 +27,4 @@
 
 .caption-item .caption-item-time {
   width: 4rem;
-}
-
-.app-yt-item:hover {
-  background-color: #eee;
 }

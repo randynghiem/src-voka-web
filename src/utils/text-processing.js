@@ -3,6 +3,7 @@ export function parseText (text) {
     return null;
   }
 
+  // eslint-disable-next-line
   const sentences = text.match( /[^\.!\?]+[\.!\?]+/g );
   return sentences.map(s => s.trim());
 }

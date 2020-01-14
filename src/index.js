@@ -30,6 +30,9 @@ if(process.env.NODE_ENV === 'development'){
   basename = '/';
 }
 
+console.log(process.env.NODE_ENV);
+console.log(process.env.REACT_APP_YOUTUBE_SEARCH_KEY);
+
 /**
  * create a global store - best with Redux
  */
