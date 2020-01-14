@@ -40,7 +40,7 @@ export default function VoiceText({ onPlay, onRepeat, onImport }) {
 
       <div className="form-row">
         <div className="form-group col-md-12">
-          <button type="button" className="btn btn-info pl-3 pr-3 mr-3">
+          <button type="button" className="btn btn-info pl-3 pr-3 mr-3" onClick={() => onImport()}>
             <i className="fas fa-folder-open fa-lg"></i>
           </button>
 
@@ -48,7 +48,7 @@ export default function VoiceText({ onPlay, onRepeat, onImport }) {
             <i className="fas fa-play fa-lg"></i>
           </button>
 
-          <button type="button" className="btn btn-info pl-3 pr-3">
+          <button type="button" className="btn btn-info pl-3 pr-3" onClick={() => onRepeat()}>
             <i className="fas fa-redo fa-lg"></i>
           </button>
         </div>

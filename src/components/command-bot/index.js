@@ -1,8 +1,7 @@
 import React from 'react';
 import annyang from 'annyang';
 
-export default function ({ onCommand }) {
-  const commands = ['repeat', 'again', 'next', 'reset', 'stop', 'play', 'pause'];
+export default function ({ commands, onCommand }) {
 
   React.useEffect(() => {
     if (annyang) {
