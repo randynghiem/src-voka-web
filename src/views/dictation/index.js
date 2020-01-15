@@ -6,15 +6,15 @@ import { triggerQuery, cleanup } from "../../event-handlers/dictation-search";
 
 class DictationApp extends React.Component {
   componentWillUnmount() {
-    this.props.onCleanup();
+    this.props.cleanup();
   }
 
   render() {
-    const { query, videos, onHandleQuery, onLoadMore } = this.props;
+    const { query, videos, triggerQuery } = this.props;
     return (
       <React.Fragment>
-        <SearchInput onClick={onHandleQuery} query={query} />
-        <SearchListing videos={videos} onFiniteScroll={onLoadMore} />
+        <SearchInput onClick={triggerQuery} query={query} />
+        <SearchListing videos={videos} onFiniteScroll={triggerQuery} />
       </React.Fragment>
     );
   }
@@ -25,9 +25,5 @@ export default connect(
     query: DictationSearch.query,
     videos: DictationSearch.videos
   }),
-  dispatch => ({
-    onHandleQuery: query => dispatch(triggerQuery(query)),
-    onLoadMore: () => dispatch(triggerQuery()),
-    onCleanup: () => dispatch(cleanup())
-  })
+  { triggerQuery, cleanup }
 )(DictationApp);

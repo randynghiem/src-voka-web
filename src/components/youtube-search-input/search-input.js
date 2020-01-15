@@ -4,7 +4,7 @@ import React, { useRef } from "react";
  * Custom search input component
  * @param {object} props React props with custom onClick event
  */
-export default function ({ query, onClick }) {
+export default function({ query, onClick }) {
   const queryRef = useRef(null);
 
   React.useEffect(() => {
@@ -20,7 +20,7 @@ export default function ({ query, onClick }) {
   };
 
   return (
-    <form onSubmit={e => handleClick(e)}>
+    <form onSubmit={handleClick}>
       <div className="form-row mt-3 mb-3">
         <div className="col-8">
           <input

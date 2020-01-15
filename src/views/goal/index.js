@@ -1,15 +1,14 @@
 //compose different todo components
-import React from 'react';
-import { connect } from 'react-redux';
-import GoalInput from '../../components/goal-input';
-import GoalList from '../../components/goal-listing/goal-list';
-import GoalFilter from '../../components/goal-listing/goal-filter';
-import { addGoal, toggleGoal, FilterType, filterGoal, cleanup } from '../../event-handlers/goal';
+import React from "react";
+import { connect } from "react-redux";
+import GoalInput from "../../components/goal-input";
+import GoalList from "../../components/goal-listing/goal-list";
+import GoalFilter from "../../components/goal-listing/goal-filter";
+import { addGoal, toggleGoal, FilterType, filterGoal, cleanup } from "../../event-handlers/goal";
 
 class Goal extends React.Component {
-
-  componentWillUnmount(){
-    this.props.onCleanup();
+  componentWillUnmount() {
+    this.props.cleanup();
   }
 
   render() {
@@ -24,7 +23,7 @@ class Goal extends React.Component {
       </div>
     );
   }
-};
+}
 
 const filterGoals = (goals, filter) => {
   switch (filter) {
@@ -42,10 +41,5 @@ export default connect(
     goals: filterGoals(GoalState.goals, GoalState.filter),
     filter: GoalState.filter
   }),
-  dispatch => ({
-    addGoal: text => dispatch(addGoal(text)),
-    toggleGoal: id => dispatch(toggleGoal(id)),
-    filterGoal: filter => dispatch(filterGoal(filter)),
-    onCleanup: () => dispatch(cleanup())
-  })
+  { addGoal, toggleGoal, filterGoal, cleanup }
 )(Goal);

@@ -1,0 +1,7 @@
+.voka-nav-link {
+  font-weight: bold;
+}
+.voka-nav-link:hover {
+  background-color: rgba(200, 200, 200, 0.3);
+  cursor: pointer;
+}

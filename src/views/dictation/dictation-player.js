@@ -4,14 +4,14 @@ import YouTubePlayer from "../../components/youtube-player/youtube-player";
 import { jumpToLine, dispatchCommand } from "../../event-handlers/dictation-view";
 import CommandBot from "../../components/command-bot";
 
-const DictationPlayer = ({ videoId, markers, playAt, onJump, command, onCommand }) => {
+const DictationPlayer = ({ videoId, markers, playAt, command, jumpToLine, dispatchCommand }) => {
   return (
     <React.Fragment>
       {markers && (
         <YouTubePlayer
           video={videoId}
           markers={markers}
-          onSpeechChange={start => onJump(start)}
+          onSpeechChange={start => jumpToLine(start)}
           playAt={playAt}
           command={command}
           width="720"
@@ -21,7 +21,7 @@ const DictationPlayer = ({ videoId, markers, playAt, onJump, command, onCommand 
       )}
       <CommandBot
         commands={["repeat", "again", "next", "reset", "stop", "play", "pause"]}
-        onCommand={cmd => onCommand(cmd)}
+        onCommand={cmd => dispatchCommand(cmd)}
       />
     </React.Fragment>
   );
@@ -34,8 +34,5 @@ export default connect(
     playAt: DictationView.playAt,
     command: DictationView.command
   }),
-  dispatch => ({
-    onJump: start => dispatch(jumpToLine(start)),
-    onCommand: cmd => dispatch(dispatchCommand(cmd))
-  })
+  { jumpToLine, dispatchCommand }
 )(DictationPlayer);
