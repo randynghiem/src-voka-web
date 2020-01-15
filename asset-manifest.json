@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/src-voka-web/static/css/main.0bbceda2.chunk.css",
-    "main.js": "/src-voka-web/static/js/main.303f1f6c.chunk.js",
-    "main.js.map": "/src-voka-web/static/js/main.303f1f6c.chunk.js.map",
+    "main.js": "/src-voka-web/static/js/main.4fac9104.chunk.js",
+    "main.js.map": "/src-voka-web/static/js/main.4fac9104.chunk.js.map",
     "runtime-main.js": "/src-voka-web/static/js/runtime-main.91490d92.js",
     "runtime-main.js.map": "/src-voka-web/static/js/runtime-main.91490d92.js.map",
     "static/css/2.356d7d60.chunk.css": "/src-voka-web/static/css/2.356d7d60.chunk.css",
     "static/js/2.789580cc.chunk.js": "/src-voka-web/static/js/2.789580cc.chunk.js",
     "static/js/2.789580cc.chunk.js.map": "/src-voka-web/static/js/2.789580cc.chunk.js.map",
     "index.html": "/src-voka-web/index.html",
-    "precache-manifest.48c2cd738a6d07f7314b09d0310e0445.js": "/src-voka-web/precache-manifest.48c2cd738a6d07f7314b09d0310e0445.js",
+    "precache-manifest.ff1cb4bba29e48389689c9ccbe6de14d.js": "/src-voka-web/precache-manifest.ff1cb4bba29e48389689c9ccbe6de14d.js",
     "service-worker.js": "/src-voka-web/service-worker.js",
     "static/css/2.356d7d60.chunk.css.map": "/src-voka-web/static/css/2.356d7d60.chunk.css.map",
     "static/css/main.0bbceda2.chunk.css.map": "/src-voka-web/static/css/main.0bbceda2.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.356d7d60.chunk.css",
     "static/js/2.789580cc.chunk.js",
     "static/css/main.0bbceda2.chunk.css",
-    "static/js/main.303f1f6c.chunk.js"
+    "static/js/main.4fac9104.chunk.js"
   ]
 }
