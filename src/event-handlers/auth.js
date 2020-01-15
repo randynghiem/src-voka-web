@@ -1,11 +1,10 @@
-import { getGoogleAuth } from "../utils/google-auth";
+import { signInGoogle, signOutGoogle } from "../utils/google-auth";
 /**
  * Action descriptions
  */
 const AUTHENTICATING_WITH_GOOGLE = "auth/AUTHENTICATING_WITH_GOOGLE";
 const SIGNED_IN_WITH_GOOGLE = "auth/SIGNED_IN_WITH_GOOGLE";
 const SIGNED_OUT_WITH_GOOGLE = "auth/SIGNED_OUT_WITH_GOOGLE";
-const CLEANUP = "auth/CLEANUP";
 
 const DEFAULT_STATE = {
   provider: null,
@@ -30,33 +29,46 @@ export const signInOrOut = provider => {
     dispatch(authenticatingWithGoogle());
 
     if (provider === "google") {
-      getGoogleAuth().then(authIns => {
-        console.log("GoogleAuth: ", authIns);
-      })
+      if (Auth.isAuthenticated) {
+        signOutGoogle()
+          .then(result => {
+            dispatch(signedOutWithGoogle());
+          })
+          .catch(err => console.log(err));
+      } else {
+        signInGoogle()
+          .then(user => {
+            dispatch(signedInWithGoogle(user));
+          })
+          .catch(err => console.log(err));
+      }
     }
   };
 };
 
 export const authenticatingWithGoogle = () => ({ type: AUTHENTICATING_WITH_GOOGLE });
 export const signedInWithGoogle = payload => ({ type: SIGNED_IN_WITH_GOOGLE, payload });
+export const signedOutWithGoogle = () => ({ type: SIGNED_OUT_WITH_GOOGLE });
 
 /**
- * Reducers
+ * Handle authentication
  */
-
 export default function Auth(state = DEFAULT_STATE, action = {}) {
   switch (action.type) {
     case AUTHENTICATING_WITH_GOOGLE:
       return {
         ...state,
+        provider: "google",
         ready: false
       };
     case SIGNED_IN_WITH_GOOGLE:
       return {
         ...state,
-        ready: true
+        ready: true,
+        isAuthenticated: true,
+        ...action.payload
       };
-    case CLEANUP:
+    case SIGNED_OUT_WITH_GOOGLE:
       return DEFAULT_STATE;
     default:
       return state;

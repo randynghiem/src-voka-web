@@ -5,13 +5,17 @@ import { signInOrOut } from "../../event-handlers/auth";
 
 class AppHeader extends React.Component {
   signInOrOut = () => {
-    console.log("sign in/out");
     this.props.dispatch(signInOrOut("google"));
   };
 
   render() {
-    return <AppNavBar isAuthenticated={false} signInOrOut={this.signInOrOut} />;
+    const { isAuthenticated } = this.props;
+    return <AppNavBar isAuthenticated={isAuthenticated} signInOrOut={this.signInOrOut} />;
   }
 }
 
-export default connect()(AppHeader);
+export default connect(
+  ({ Auth }) => ({
+    isAuthenticated: Auth.isAuthenticated
+  })
+)(AppHeader);

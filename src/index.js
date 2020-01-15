@@ -15,6 +15,7 @@ import DictationView from "./views/dictation/dictation-view";
 import AppHeader from "./views/shared/app-header";
 import Dashboard from "./views/dashboard";
 import Voice from "./views/voice";
+import Login from "./views/login";
 
 /**
  * Initial setup
@@ -48,6 +49,7 @@ ReactDOM.render(
       <main className="app-body">
         <section className="app-view">
           <div className="container app-container">
+            <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Dashboard} />
             <Route exact path="/dictation" component={DictationApp} />
             <Route path="/dictation/:vid" component={DictationView} />
