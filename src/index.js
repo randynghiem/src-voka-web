@@ -16,15 +16,13 @@ import AppHeader from "./views/shared/app-header";
 import Dashboard from "./views/dashboard";
 import Voice from "./views/voice";
 import Login from "./views/login";
+import ProtectedRoute from './views/shared/protected-route';
 
 /**
  * Initial setup
  */
 const middlewares = [thunk];
 let basename = process.env.REACT_APP_BASE_NAME;
-
-console.log("NODE_ENV: ", process.env.NODE_ENV);
-console.log("REACT_APP_BASE_NAME: ", process.env.REACT_APP_BASE_NAME);
 
 /**
  * Development setup
@@ -50,11 +48,11 @@ ReactDOM.render(
         <section className="app-view">
           <div className="container app-container">
             <Route exact path="/login" component={Login} />
-            <Route exact path="/" component={Dashboard} />
-            <Route exact path="/dictation" component={DictationApp} />
-            <Route path="/dictation/:vid" component={DictationView} />
-            <Route path="/goal" component={Goal} />
-            <Route path="/voice" component={Voice} />
+            <ProtectedRoute exact path="/" component={Dashboard} />
+            <ProtectedRoute exact path="/dictation" component={DictationApp} />
+            <ProtectedRoute path="/dictation/:vid" component={DictationView} />
+            <ProtectedRoute path="/goal" component={Goal} />
+            <ProtectedRoute path="/voice" component={Voice} />
           </div>
         </section>
       </main>

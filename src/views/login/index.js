@@ -1,11 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { signInOrOut } from "../../event-handlers/auth";
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
 
-  render() {
+  signInOrOut = () => {
+    this.props.dispatch(signInOrOut("google"));
+  };
 
+  render() {
+    const { isAuthenticated } = this.props;
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
     console.log(this.props);
+
+    if (isAuthenticated) {
+      return <Redirect to={from} />
+    }
 
     return (
       <div className="row justify-content-center">
@@ -13,7 +24,7 @@ class Login extends React.Component {
           <div className="mb-5">
             <i className="fas fa-user fa-5x text-info"></i>
           </div>
-          <button type="button" className="btn btn-danger pl-3 pr-5">
+          <button type="button" className="btn btn-danger pl-3 pr-5" onClick={this.signInOrOut}>
             <i className="fab fa-google mr-5"></i>
             Sign In with Google
           </button>
@@ -23,4 +34,8 @@ class Login extends React.Component {
   }
 }
 
-export default connect()(Login);
+export default connect(
+  ({ Auth }) => ({
+    isAuthenticated: Auth.isAuthenticated
+  })
+)(Login);
