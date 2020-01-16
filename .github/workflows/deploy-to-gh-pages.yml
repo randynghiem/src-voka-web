@@ -15,7 +15,8 @@ jobs:
         npm install
         npm run build
       env:
-        REACT_APP_YOUTUBE_SEARCH_KEY: AIzaSyCT5YNj0WpEUrt_4K8b3GZ6NoBZTOImXMA
+        REACT_APP_YOUTUBE_SEARCH_KEY: ${{ secrets.REACT_APP_YOUTUBE_SEARCH_KEY }}
+        REACT_APP_GOOGLE_CLIENT_API: ${{ secrets.REACT_APP_GOOGLE_CLIENT_API }}
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
