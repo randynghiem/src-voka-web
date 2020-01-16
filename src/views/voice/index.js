@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import VoiceText from "../../components/voice-text";
-import { getVoices, speakText } from "../../utils/speech";
+import { getVoices } from "../../utils/speech";
 
 class Voice extends React.Component {
   state = {

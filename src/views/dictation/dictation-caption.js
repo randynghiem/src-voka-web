@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { changeToLine, loadCaption } from "../../event-handlers/dictation-view";
 import YoutubeCaption from "../../components/youtube-caption";
+import PropTypes from 'prop-types';
 
 const DictationCaption = ({ videoId, lines, curStart, changeToLine, loadCaption }) => {
   useEffect(() => {
@@ -14,6 +15,14 @@ const DictationCaption = ({ videoId, lines, curStart, changeToLine, loadCaption 
 
   return <YoutubeCaption lines={lines} curStart={curStart} onLineClick={changeToLine} />;
 };
+
+DictationCaption.propTypes = {
+  lines: PropTypes.array,
+  curStart: PropTypes.number,
+  videoId: PropTypes.string,
+  changeToLine: PropTypes.func,
+  loadCaption: PropTypes.func
+}
 
 export default connect(
   ({ DictationView }, ownProps) => ({

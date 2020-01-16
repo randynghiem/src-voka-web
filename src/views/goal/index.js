@@ -5,6 +5,7 @@ import GoalInput from "../../components/goal-input";
 import GoalList from "../../components/goal-listing/goal-list";
 import GoalFilter from "../../components/goal-listing/goal-filter";
 import { addGoal, toggleGoal, FilterType, filterGoal, cleanup } from "../../event-handlers/goal";
+import PropTypes from 'prop-types';
 
 class Goal extends React.Component {
   componentWillUnmount() {
@@ -24,6 +25,15 @@ class Goal extends React.Component {
     );
   }
 }
+
+Goal.propTypes = {
+  goals: PropTypes.array.isRequired,
+  filter: PropTypes.string,
+  addGoal: PropTypes.func,
+  toggleGoal: PropTypes.func,
+  filterGoal: PropTypes.func,
+  cleanup: PropTypes.func
+};
 
 const filterGoals = (goals, filter) => {
   switch (filter) {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DictationPlayer from "./dictation-player";
 import DictationCaption from "./dictation-caption";
 import { cleanup } from '../../event-handlers/dictation-view';
+import PropTypes from 'prop-types';
 
 class DictationView extends React.Component {
 
@@ -30,5 +31,9 @@ class DictationView extends React.Component {
     );
   }
 }
+
+DictationView.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
 
 export default connect()(DictationView);

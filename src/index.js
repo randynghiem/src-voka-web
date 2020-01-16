@@ -37,6 +37,10 @@ if (process.env.NODE_ENV === "production") {
 
 /**
  * create a global store - best with Redux
+ * createStore(reducer, [preloadedState], [enhancer])
+ * [preloadedState] (any): The initial state. 
+ * You may optionally specify it to hydrate the state from the server in universal apps, 
+ * or to restore a previously serialized user session. 
  */
 const store = createStore(reducers, applyMiddleware(...middlewares));
 

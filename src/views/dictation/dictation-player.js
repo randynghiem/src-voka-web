@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import YouTubePlayer from "../../components/youtube-player/youtube-player";
 import { jumpToLine, dispatchCommand } from "../../event-handlers/dictation-view";
 import CommandBot from "../../components/command-bot";
+import PropTypes from 'prop-types';
 
 const DictationPlayer = ({ videoId, markers, playAt, command, jumpToLine, dispatchCommand }) => {
   return (
@@ -25,6 +26,15 @@ const DictationPlayer = ({ videoId, markers, playAt, command, jumpToLine, dispat
       />
     </React.Fragment>
   );
+};
+
+DictationPlayer.propTypes = {
+  videoId: PropTypes.string.isRequired,
+  markers: PropTypes.array,
+  playAt: PropTypes.string,
+  command: PropTypes.string,
+  jumpToLine: PropTypes.func,
+  dispatchCommand: PropTypes.func
 };
 
 export default connect(

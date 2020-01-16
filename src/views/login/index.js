@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { signInOrOut } from "../../event-handlers/auth";
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 class Login extends React.Component {
 
@@ -33,6 +34,11 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
 
 export default connect(
   ({ Auth }) => ({
