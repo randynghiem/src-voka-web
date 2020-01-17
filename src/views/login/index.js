@@ -13,7 +13,6 @@ class Login extends React.Component {
   render() {
     const { isAuthenticated } = this.props;
     const { from } = this.props.location.state || { from: { pathname: '/' } };
-    console.log(this.props);
 
     if (isAuthenticated) {
       return <Redirect to={from} />
@@ -36,7 +35,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool,
   dispatch: PropTypes.func.isRequired
 };
 

@@ -1,4 +1,5 @@
 import { signInGoogle, signOutGoogle } from "../utils/google-auth";
+import { setCache } from "../utils/local-storage";
 /**
  * Action descriptions
  */
@@ -51,25 +52,39 @@ export const signedInWithGoogle = payload => ({ type: SIGNED_IN_WITH_GOOGLE, pay
 export const signedOutWithGoogle = () => ({ type: SIGNED_OUT_WITH_GOOGLE });
 
 /**
+ * Get intial state of Auth component
+ * @returns A promise with the default state
+ */
+export const init = () =>
+  new Promise((resolve, reject) => {
+    resolve(DEFAULT_STATE);
+  });
+
+const cached = state => {
+  setCache({ Auth: state });
+  return state;
+};
+
+/**
  * Handle authentication
  */
 export default function Auth(state = DEFAULT_STATE, action = {}) {
   switch (action.type) {
     case AUTHENTICATING_WITH_GOOGLE:
-      return {
+      return cached({
         ...state,
         provider: "google",
         ready: false
-      };
+      });
     case SIGNED_IN_WITH_GOOGLE:
-      return {
+      return cached({
         ...state,
         ready: true,
         isAuthenticated: true,
         ...action.payload
-      };
+      });
     case SIGNED_OUT_WITH_GOOGLE:
-      return DEFAULT_STATE;
+      return cached(DEFAULT_STATE);
     default:
       return state;
   }

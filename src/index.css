@@ -5,3 +5,8 @@
 .app-body {
   margin-top: 70px;
 }
+
+.app-loading-icon {
+  width: 3rem;
+  height: 3rem;
+}

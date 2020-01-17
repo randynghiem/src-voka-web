@@ -10,7 +10,7 @@ let googleAuthPromise = null;
 const getGoogleAuth = () => {
   if (!googleAuthPromise) {
     googleAuthPromise = new Promise((resolve, reject) => {
-      window.gapi.load("auth2", function () {
+      window.gapi.load("auth2", function() {
         window.gapi.auth2
           .init({
             client_id: process.env.REACT_APP_GOOGLE_CLIENT_API,
@@ -36,11 +36,21 @@ export const isSignedInGoogle = () => {
   return new Promise((resolve, reject) => {
     getGoogleAuth()
       .then(authIns => {
-        resolve(authIns.isSignedIn.get());
+        if (authIns.isSignedIn.get()) {
+          const user = authIns.currentUser.get();
+          const profile = user.getBasicProfile();
+          resolve(true, {
+            uid: profile.getId(),
+            name: profile.getName(),
+            email: profile.getEmail()
+          });
+        } else {
+          resolve(false);
+        }
       })
       .catch(err => reject(err));
-  })
-}
+  });
+};
 
 /**
  * To sign in with a google account
@@ -58,11 +68,11 @@ export const signInGoogle = () => {
             name: profile.getName(),
             email: profile.getEmail()
           });
-        })
+        });
       })
       .catch(err => reject(err));
   });
-}
+};
 
 /**
  * To sign out the current user
@@ -79,18 +89,4 @@ export const signOutGoogle = () => {
       })
       .catch(err => reject(err));
   });
-}
-
-/**
- * To get the current google user if already logged in
- */
-export const getCurrentGoogleUser = () => {
-  console.log("get current user");
-  return new Promise((resolve, reject) => {
-    getGoogleAuth()
-      .then(authIns => {
-        resolve(authIns.currentUser.get());
-      })
-      .catch(err => reject(err));
-  });
-}
+};

@@ -27,6 +27,15 @@ export const dispatchCommand = command => ({ type: DISPATCH_COMMAND, command });
 export const cleanup = () => ({ type: CLEANUP });
 
 /**
+ * Get the initial state of Dictation View component
+ * @returns A promise with the default state
+ */
+export const init = () =>
+  new Promise((resolve, reject) => {
+    resolve(DEFAULT_STATE);
+  });
+
+/**
  * reducer for dictation view
  */
 export default function(state = DEFAULT_STATE, action = {}) {

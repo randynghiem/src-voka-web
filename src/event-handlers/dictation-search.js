@@ -71,6 +71,15 @@ export const appendQueryData = data => ({ type: APPEND_QUERY_DATA, data });
 export const cleanup = () => ({ type: CLEANUP });
 
 /**
+ * Get the initial state of Dictation Search component
+ * @returns A promise with the default state
+ */
+export const init = () =>
+  new Promise((resolve, reject) => {
+    resolve(DEFAULT_STATE);
+  });
+
+/**
  * reducer for dictation view
  */
 export default function(state = DEFAULT_STATE, action = {}) {

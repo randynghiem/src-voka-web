@@ -16,7 +16,7 @@ class AppHeader extends React.Component {
 }
 
 AppHeader.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool,
   dispatch: PropTypes.func.isRequired
 };
 
