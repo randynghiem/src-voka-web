@@ -10,18 +10,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-    - name: Build
+    - name: Build and Test
       run: |
         npm install
+        npm test
         npm run build
       env:
         REACT_APP_YOUTUBE_SEARCH_KEY: ${{ secrets.REACT_APP_YOUTUBE_SEARCH_KEY }}
         REACT_APP_GOOGLE_CLIENT_API: ${{ secrets.REACT_APP_GOOGLE_CLIENT_API }}
-    - name: Test
-      run: npm test
-      env:
-        REACT_APP_YOUTUBE_SEARCH_KEY: ${{ secrets.REACT_APP_YOUTUBE_SEARCH_KEY }}
-        REACT_APP_GOOGLE_CLIENT_API: ${{ secrets.REACT_APP_GOOGLE_CLIENT_API }}
+
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
