@@ -1,31 +1,24 @@
 /**
  * https://developers.google.com/identity/sign-in/web/reference
  */
-let googleAuthPromise = null;
 
 /**
  * Private method to initialize google auth instance
  * @returns Promise of Google Auth Instance
  */
-const getGoogleAuth = () => {
-  if (!googleAuthPromise) {
-    googleAuthPromise = new Promise((resolve, reject) => {
-      window.gapi.load("auth2", function() {
-        window.gapi.auth2
-          .init({
-            client_id: process.env.REACT_APP_GOOGLE_CLIENT_API,
-            cookiepolicy: "single_host_origin"
-          })
-          .then(authIns => {
-            resolve(authIns);
-          })
-          .catch(err => reject(err));
-      });
-    });
-  }
-
-  return googleAuthPromise;
-};
+const getGoogleAuth = new Promise((resolve, reject) => {
+  window.gapi.load("auth2", function () {
+    window.gapi.auth2
+      .init({
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_API,
+        cookiepolicy: "single_host_origin"
+      })
+      .then(authIns => {
+        resolve(authIns);
+      })
+      .catch(err => reject(err));
+  });
+});
 
 /**
  * To check if the user signs in or not.
@@ -34,7 +27,7 @@ const getGoogleAuth = () => {
 export const isSignedInGoogle = () => {
   console.log("isSignedIn");
   return new Promise((resolve, reject) => {
-    getGoogleAuth()
+    getGoogleAuth
       .then(authIns => {
         if (authIns.isSignedIn.get()) {
           const user = authIns.currentUser.get();
@@ -59,7 +52,7 @@ export const isSignedInGoogle = () => {
 export const signInGoogle = () => {
   console.log("signed in");
   return new Promise((resolve, reject) => {
-    getGoogleAuth()
+    getGoogleAuth
       .then(authIns => {
         authIns.signIn().then(user => {
           const profile = user.getBasicProfile();
@@ -81,7 +74,7 @@ export const signInGoogle = () => {
 export const signOutGoogle = () => {
   console.log("sign out");
   return new Promise((resolve, reject) => {
-    getGoogleAuth()
+    getGoogleAuth
       .then(authIns => {
         authIns.signOut().then(() => {
           resolve(true);

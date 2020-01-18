@@ -30,15 +30,14 @@ export const cleanup = () => ({ type: CLEANUP });
  * Get the initial state of Dictation View component
  * @returns A promise with the default state
  */
-export const init = () =>
-  new Promise((resolve, reject) => {
-    resolve(DEFAULT_STATE);
-  });
+export const init = new Promise((resolve, reject) => {
+  resolve(DEFAULT_STATE);
+});
 
 /**
  * reducer for dictation view
  */
-export default function(state = DEFAULT_STATE, action = {}) {
+export default function (state = DEFAULT_STATE, action = {}) {
   switch (action.type) {
     case LOAD_CAPTION:
       const lines = action.lines.map(i => ({

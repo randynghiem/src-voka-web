@@ -55,10 +55,9 @@ export const signedOutWithGoogle = () => ({ type: SIGNED_OUT_WITH_GOOGLE });
  * Get intial state of Auth component
  * @returns A promise with the default state
  */
-export const init = () =>
-  new Promise((resolve, reject) => {
-    resolve(DEFAULT_STATE);
-  });
+export const init = new Promise((resolve, reject) => {
+  resolve(DEFAULT_STATE);
+});
 
 const cached = state => {
   setCache({ Auth: state });

@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === "production") {
  * Initialize the store with pre-loaded information
  */
 
-initializeStore().then(preloadedState => {
+initializeStore.then(preloadedState => {
   const store = createStore(reducers, preloadedState, applyMiddleware(...middlewares));
 
   console.log("preloadedState: ", preloadedState);

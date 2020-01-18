@@ -29,10 +29,9 @@ export const cleanup = () => ({ type: CLEANUP });
  * Get the initial state of Goal component
  * @returns A promise with the default state
  */
-export const init = () =>
-  new Promise((resolve, reject) => {
-    resolve(DEFAULT_STATE);
-  });
+export const init = new Promise((resolve, reject) => {
+  resolve(DEFAULT_STATE);
+});
 
 /**
  * reducer
