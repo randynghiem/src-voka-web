@@ -1,7 +1,6 @@
 import './voice-play.css';
 import React from "react";
 import { connect } from "react-redux";
-import VoiceText from "../../components/voice-text";
 import { speakText } from "../../utils/speech";
 import CommandBot from '../../components/command-bot';
 import * as VokaApi from '../../services/voka-api';
