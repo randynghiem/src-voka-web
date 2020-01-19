@@ -9,12 +9,13 @@ import logger from "redux-logger";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import reducers, { initializeStore } from "./event-handlers";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import Goal from "./views/goal";
 import DictationView from "./views/dictation/dictation-view";
 import AppHeader from "./views/shared/app-header";
 import Dashboard from "./views/dashboard";
-import Voice from "./views/voice";
+import Voice from './views/voice';
+import VoicePlay from "./views/voice/voice-play";
 import Login from "./views/login";
 import ProtectedRoute from "./views/shared/protected-route";
 
@@ -42,8 +43,6 @@ if (process.env.NODE_ENV === "production") {
 initializeStore.then(preloadedState => {
   const store = createStore(reducers, preloadedState, applyMiddleware(...middlewares));
 
-  console.log("preloadedState: ", preloadedState);
-
   ReactDOM.render(
     <Provider store={store}>
       <Router basename={basename}>
@@ -55,8 +54,9 @@ initializeStore.then(preloadedState => {
               <ProtectedRoute exact path="/" component={Dashboard} />
               <ProtectedRoute exact path="/dictation" component={DictationApp} />
               <ProtectedRoute path="/dictation/:vid" component={DictationView} />
-              <ProtectedRoute path="/goal" component={Goal} />
-              <ProtectedRoute path="/voice" component={Voice} />
+              <ProtectedRoute exact path="/goal" component={Goal} />
+              <ProtectedRoute exact path="/voice" component={Voice} />
+              <ProtectedRoute path="/voice/:id" component={VoicePlay} />
             </div>
           </section>
         </main>

@@ -13,16 +13,12 @@ const voicePromise = new Promise((resolve, reject) => {
 });
 
 export const speakText = (text, lang = 'de-DE', rate = 0.8) => {
-  if (text) {
-    voicePromise.then(voice => {
-      console.log("text: ", text);
-      console.log("voice: ", voice);
-      let u = new SpeechSynthesisUtterance();
-      u.voice = voice;
-      u.lang = lang;
-      u.text = text;
-      u.rate = rate;
-      window.speechSynthesis.speak(u);
-    });
-  }
+  text && voicePromise.then(voice => {
+    let u = new SpeechSynthesisUtterance();
+    u.voice = voice;
+    u.lang = lang;
+    u.text = text;
+    u.rate = rate;
+    window.speechSynthesis.speak(u);
+  });
 }
