@@ -14,7 +14,7 @@ import Goal from "./views/goal";
 import DictationView from "./views/dictation/dictation-view";
 import AppHeader from "./views/shared/app-header";
 import Dashboard from "./views/dashboard";
-import Voice from './views/voice';
+import Voice from "./views/voice";
 import VoicePlay from "./views/voice/voice-play";
 import Login from "./views/login";
 import ProtectedRoute from "./views/shared/protected-route";
@@ -50,8 +50,8 @@ initializeStore.then(preloadedState => {
         <main className="app-body">
           <section className="app-view">
             <div className="container app-container">
+              <Route exact path="/" component={Dashboard} />
               <Route exact path="/login" component={Login} />
-              <ProtectedRoute exact path="/" component={Dashboard} />
               <ProtectedRoute exact path="/dictation" component={DictationApp} />
               <ProtectedRoute path="/dictation/:vid" component={DictationView} />
               <ProtectedRoute exact path="/goal" component={Goal} />
