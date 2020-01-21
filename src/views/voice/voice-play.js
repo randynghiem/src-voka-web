@@ -32,7 +32,7 @@ class VoicePlay extends React.Component {
 
   componentDidUpdate(prevProps) {
     // handle changes of props
-
+    
   }
 
   onPlay = () => {

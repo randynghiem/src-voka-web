@@ -1,11 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getSets } from "../../services/voka-api";
-import { Link } from "react-router-dom";
+import SetCard from '../../components/set-card';
 
+/**
+ * Dashboard to explore available sets
+ */
 class Voice extends React.Component {
   state = {
-    sets: []
+    sets: null
   };
 
   componentDidMount() {
@@ -16,7 +19,6 @@ class Voice extends React.Component {
 
   render() {
     const { sets } = this.state;
-    console.log(sets);
     return (
       <form>
         <div className="form-group">
@@ -29,26 +31,7 @@ class Voice extends React.Component {
         </div>
         <h4>Popular Sets</h4>
         <div className="row">
-          {sets.map(s => (
-            <div className="col-sm-6 mb-4" key={s.id}>
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">
-                    <Link to={`/voice/${s.id}`}>{s.title}</Link>
-                  </h5>
-                  <div className="card-text">
-                    <ul className="list-group">
-                      {s.sections.map(sec => (
-                        <li className="list-group-item border-0 p-0" key={sec.title}>
-                          {sec.title}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+          {sets && sets.map(s => <SetCard card={s} />)}
         </div>
       </form>
     );
